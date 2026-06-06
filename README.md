@@ -1,0 +1,2 @@
+# StockTradeAppPython
+Stock analysis
