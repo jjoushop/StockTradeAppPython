@@ -1,0 +1,78 @@
+{
+  "threads": [
+    {
+      "name": "worker-alpha",
+      "task": "stock_quote",
+      "stock_quote": {
+        "host": "127.0.0.1",
+        "port": 11111,
+        "symbols": [
+          "US.MU",
+          "US.NVDA",
+          "US.GOOG",
+          "US.AAPL",
+          "US.ARM",
+          "US.MSFT",
+          "US.TSLA",
+          "US.SNDK"         
+        ]
+      }
+    },
+    {
+      "name": "worker-beta",
+      "task": "support_resistance",
+      "support_resistance": {
+        "ticker": "NVDA",
+        "num_days": 30,
+        "price_tolerance": 0.01,
+        "weights": {
+          "touches": 0.35,
+          "volume": 0.25,
+          "duration": 0.20,
+          "rejection": 0.10,
+          "volatility": 0.10
+        },
+        "output_file": "output/NVDA_support_resistance.csv"
+      }
+    },
+    {
+      "name": "worker-gamma",
+      "task": "moomoo_support_resistance",
+      "moomoo_support_resistance": {
+        "host": "127.0.0.1",
+        "port": 11111,
+        "symbol": "US.GOOG",
+        "num_bars": 30,
+        "price_tolerance": 0.01,
+        "weights": {
+          "touches": 0.35,
+          "volume": 0.25,
+          "duration": 0.20,
+          "rejection": 0.10,
+          "volatility": 0.10
+        }
+      }
+    },
+    {
+      "name": "worker-delta",
+      "task": "yfinance_rs_score",
+      "yfinance_rs_score": {
+        "ticker": "MU",
+        "num_days": 30,
+        "num_minutes": 20,
+        "price_tolerance": 0.01,
+        "weights": {
+          "touches": 0.35,
+          "volume": 0.25,
+          "duration": 0.20,
+          "rejection": 0.10,
+          "volatility": 0.10
+        },
+        "output_file": "output/MU_yfinance_rs_score.csv",
+        "top": 20
+      }
+    }
+  ],
+  "logging_enabled": true,
+  "heartbeat_interval_seconds": 60.0
+}
