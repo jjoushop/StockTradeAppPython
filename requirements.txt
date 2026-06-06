@@ -1,0 +1,11 @@
+numpy
+pandas
+requests
+scipy
+XlsxWriter
+yfinance
+moomoo-api
+futu-api
+openai
+nest_asyncio
+openai-agents
