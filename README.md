@@ -36,6 +36,10 @@
 
 	 					<img width="850" height="622" alt="image" src="https://github.com/user-attachments/assets/2a13bed0-a6dc-4171-afcc-f89752949e26" />
 
+   C. How to run the application:
+
+   		python StockTradeAgent.py
+
 
 	 
 
