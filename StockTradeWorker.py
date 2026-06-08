@@ -17,7 +17,7 @@ from StockTradeMoomooSupportResistance import (
     compute_moomoo_support_resistance,
 )
 from StockTradeSharedMemory import SharedMemory
-from StockTradeQuote import StockQuoteResult, query_stock_quote
+from StockTradeQuote import StockQuotePoller, StockQuoteResult
 from StockTradeSupportResistance import (
     compute_support_resistance,
     SupportResistanceResult,
@@ -49,7 +49,7 @@ def run_worker(
     current_thread.name = configured_name
 
     logger = logging.getLogger(__name__)
-    quote_query = stock_quote_query or query_stock_quote
+    quote_query = stock_quote_query or StockQuotePoller()
     rs_compute = support_resistance_compute or compute_support_resistance
     moomoo_rs_compute = (
         moomoo_support_resistance_compute or compute_moomoo_support_resistance
@@ -85,6 +85,9 @@ def run_worker(
                 _log_yfinance_rs_score_result(logger, configured_name, result)
             stop_event.wait(heartbeat_interval_seconds)
     finally:
+        close = getattr(quote_query, "close", None)
+        if callable(close):
+            close()
         shared_memory.mark_stopped(configured_name)
         logger.info("%s stopped", configured_name)
 
